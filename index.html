@@ -5,9 +5,49 @@
 </head> 
  
 <body> 
-	teste mundo
+	<button class="btn btn-danger" id="botao" onclick="myFunction()">
+  	Click aqui.
+	</button>
+
+	<p id="demo"></p>
+	<p id="pokemon"></p>
 </body> 
-	<script>
-		console.log("testando")
-	</script>
+
+
+<script>
+  var link =
+    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"
+
+  function myFunction() {
+    console.log("clico aqui");
+	document.getElementById("demo").innerHTML = "<div>pokemons</div>";
+    var elem = document.getElementById('botao');
+    elem.parentNode.removeChild(elem);
+    
+    fetch("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=150")
+      .then((response) => response.json())
+      .then((data) => {
+        var resultados = data["results"];
+        var valor = 1;
+        console.log(resultados);
+
+        for (var k in resultados) {
+        }
+
+        resultados.forEach((element) => {
+          document.getElementById("pokemon").innerHTML += `<div> ${
+            element.name
+          } </div>
+        	<img src="${link + valor}.png">
+        	`;
+          valor += 1;
+          console.log(valor);
+        });
+      })
+      .catch((error) => console.error(error));
+  }
+</script>
+	
+	
+	
 </html> 
